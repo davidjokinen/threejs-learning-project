@@ -4,6 +4,7 @@ const webpack = require("webpack");
 module.exports = {
   entry: {
     'dist':	path.join(__dirname, 'index.js'),
+    'rpg/dist':	path.join(__dirname, 'rpg/index.js'),
     // 'game/js/ui':		path.join(__dirname, 'game/js/ui', 'index.js'),
     // 'game/js/components':		path.join(__dirname, 'game/js/components', 'index.js'),
     // 'game/js/core':		path.join(__dirname, 'game/js/core', 'index.js'),

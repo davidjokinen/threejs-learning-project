@@ -76,7 +76,7 @@ loader.load('./resources/objects.png', (texture) => {
   cube.position.set(0, -2, 0);
   scene.add(cube);
 });
-const geometry2 = new THREE.PlaneGeometry( 5, 5 , 10, 10);
+const geometry2 = new THREE.PlaneGeometry( 50, 50 , 100, 100);
 const geometry3 = new THREE.PlaneGeometry( 5, 5 );
 
 const map = [
@@ -92,21 +92,21 @@ const map = [
   [0,0,0,0,0,0,0,0,0,0],
 ]
 
-for(let x=0;x<10;x++) {
-  for(let y=0;y<10;y++) {
-    const tile = map[y][x];
+for(let x=0;x<100;x++) {
+  for(let y=0;y<100;y++){
+    const tile = map[y%10][x%10];
     switch (tile) {
       case 0:
-        setUVs(geometry2.faceVertexUvs, 4, 0, x+y*10);
+        setUVs(geometry2.faceVertexUvs, 3, 0, x+y*100);
         break;
       case 1:
-        setUVs(geometry2.faceVertexUvs, 2, 0, x+y*10);
+        setUVs(geometry2.faceVertexUvs, 2, 0, x+y*100);
         break;
       case 2:
-        setUVs(geometry2.faceVertexUvs, 7, 0, x+y*10);
+        setUVs(geometry2.faceVertexUvs, 7, 0, x+y*100);
         break;
       case 3:
-        setUVs(geometry2.faceVertexUvs, 8, 1, x+y*10);
+        setUVs(geometry2.faceVertexUvs, 8, 1, x+y*100);
         break;
     }
     
@@ -120,14 +120,14 @@ loader.load('./resources/objects.png', (texture) => {
   const material2 = new THREE.MeshPhongMaterial({
       // color: 0xffffFF, 
       // flatShading: true,
-      side: THREE.DoubleSide,
+      // side: THREE.DoubleSide,
       map: texture,
       // aoMapIntensity: .5,
       
     });
   material2.faceVertexUvs = material2.faceVertexUvs;
   const background = new THREE.Mesh( geometry2, material2 );
-  background.position.set(0, 0, -2);
+  background.position.set(0, 0, -1.8);
   scene.add( background );
 
   const background2 = new THREE.Mesh( geometry3, material2 );
@@ -144,7 +144,15 @@ const animate = function () {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
   }
-  
+  for(let x=0;x<100;x++) {
+    for(let y=0;y<100;y++){
+      const tile = ~~(Math.random()*10);
+      setUVs(geometry2.faceVertexUvs, tile, 0, x+y*100);
+      
+      
+    }
+  }
+  geometry2.uvsNeedUpdate = true;
 
   // light.intensity = Math.sin(TIME/1000)/3+.3;
 
