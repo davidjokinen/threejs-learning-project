@@ -11,11 +11,15 @@ export class BaseServer {
     this.clients.push(client);
   }
 
-  send() {
-
+  send(data) {
+    this.clients.map(client => client.get(data));
   }
 
   get() {
 
   } 
+
+  on() {
+    
+  }
 }

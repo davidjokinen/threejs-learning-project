@@ -4,6 +4,7 @@
 export class BaseClient {
   constructor() {
     this.server = null;
+    this.onEvents = [];
   }
 
   connect(server) {
@@ -18,6 +19,10 @@ export class BaseClient {
   }
 
   get(events) {
+    this.onEvents.map(promise => promise(events));
+  }
 
-  } 
+  on(promise) {
+    this.onEvents.push(promise);
+  }
 }
